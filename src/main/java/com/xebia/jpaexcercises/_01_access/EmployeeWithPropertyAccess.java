@@ -25,6 +25,15 @@ public class EmployeeWithPropertyAccess {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "EmployeeWithPropertyAccess{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public void setName(String name) {
         this.name = name;
     }

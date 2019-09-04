@@ -12,6 +12,15 @@ public class Employee {
     @Column(name = "full_name")
     private String name;
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
+
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "long_bio")
     private String bio;

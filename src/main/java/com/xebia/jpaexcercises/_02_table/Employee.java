@@ -11,6 +11,15 @@ public class Employee {
 
     @Id
     private Long id;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     @Column(name = "full_name")
     private String name;
 
