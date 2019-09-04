@@ -11,6 +11,15 @@ public class EmployeeWithMixedAccess {
     @Transient
     private String email;
 
+    @Override
+    public String toString() {
+        return "EmployeeWithMixedAccess{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
@@ -31,5 +40,9 @@ public class EmployeeWithMixedAccess {
     @Column(name = "email_address")
     public String getEmailAddress() {
         return this.email.replace("@gmail.com", "@xebia.com");
+    }
+
+    public void setEmailAddress(String email) {
+        this.email = email;
     }
 }
