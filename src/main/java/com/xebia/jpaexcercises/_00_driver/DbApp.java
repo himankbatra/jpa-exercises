@@ -107,10 +107,12 @@ public class DbApp {
 
         entityManager.getTransaction().commit();
 
-      //  entityManager.close();
-     //   entityManager = entityManagerFactory.createEntityManager();
-        Employee foundEmp = entityManager.find(Employee.class, 1L);
-        System.out.println(foundEmp);
+
+        entityManager.close();
+        entityManager = entityManagerFactory.createEntityManager();
+        Employee fEmployeeMixed = entityManager.find(Employee.class, 1L);
+        System.out.println(fEmployeeMixed);
+
         entityManager.close();
         entityManagerFactory.close();
 
