@@ -110,8 +110,8 @@ public class DbApp {
 
         entityManager.close();
         entityManager = entityManagerFactory.createEntityManager();
-        Employee fEmployeeMixed = entityManager.find(Employee.class, 1L);
-        System.out.println(fEmployeeMixed);
+        Employee foundEmployeeLob = entityManager.find(Employee.class, 1L);
+        System.out.println(foundEmployeeLob);
 
         entityManager.close();
         entityManagerFactory.close();
