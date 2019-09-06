@@ -17,21 +17,40 @@ public class OneToOneApp {
             entityManager.getTransaction().begin();
 
             ParkingSpace parkingSpace = new ParkingSpace(123);
-            Employee employee = new Employee("Test Employee", 1_000_000, parkingSpace);
-            entityManager.persist(employee);
+            entityManager.persist(parkingSpace);
             entityManager.getTransaction().commit();
             entityManager.close();
+
             entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
 
-            Employee foundEmployee = entityManager.find(Employee.class, employee.getId());
-            System.out.println(foundEmployee);
+            Employee employee = new Employee("Test Employee", 1_000_000, parkingSpace);
+            entityManager.persist(employee);
+           entityManager.getTransaction().commit();
+          entityManager.close();
+           entityManager = entityManagerFactory.createEntityManager();
 
-            entityManager.close();
-            entityManager = entityManagerFactory.createEntityManager();
+         /* Employee foundEmployee = entityManager.find(Employee.class, employee.getId());
+         System.out.println(foundEmployee);*/
 
-            ParkingSpace foundParking = entityManager.find(ParkingSpace.class, parkingSpace.getId());
+        //    entityManager.close();
+        //    entityManager = entityManagerFactory.createEntityManager();
+
+           ParkingSpace foundParking = entityManager.find(ParkingSpace.class, parkingSpace.getId());
             System.out.println(foundParking);
 
+
+
+          // entityManager.close();
+           //entityManager = entityManagerFactory.createEntityManager();
+           entityManager.getTransaction().begin();
+
+            foundParking.getEmployee().setParkingSpace(null);
+           entityManager.remove(foundParking);
+
+
+            entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);

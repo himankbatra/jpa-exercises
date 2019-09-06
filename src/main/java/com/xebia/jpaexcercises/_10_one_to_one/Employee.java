@@ -11,7 +11,13 @@ public class Employee {
     private Long id;
     private String name;
     private long salary;
-    @OneToOne
+
+
+
+
+  //  @JoinColumn(foreignKey = @ForeignKey(name="plot_id"))
+    @JoinColumn(name="plot_id")
+   @OneToOne
     private ParkingSpace parkingSpace;
 
     public Employee() {
@@ -49,7 +55,7 @@ public class Employee {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", salary=" + salary +
-                ", parkingSpace=" + parkingSpace +
+             //   ", parkingSpace=" + parkingSpace +
                 '}';
     }
 }

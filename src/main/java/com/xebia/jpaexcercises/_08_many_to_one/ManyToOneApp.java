@@ -15,16 +15,51 @@ public class ManyToOneApp {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
 
-            Employee employee = new Employee();
+          /*    Department department = new Department("IT");
+            entityManager.persist(department);
+
+
+
+
+          Employee employee = new Employee();
             employee.setName("Test Employee");
-            employee.setSalary(100_000);
-            Department department = new Department("IT");
+            employee.setSalary(1_00_000);
             employee.setDepartment(department);
             entityManager.persist(employee);
             entityManager.getTransaction().commit();
 
             Employee foundEmployee = entityManager.find(Employee.class, employee.getId());
-            System.out.println(foundEmployee);
+            System.out.println(foundEmployee);*/
+
+            Department department = new Department("IT");
+            entityManager.persist(department);
+
+            entityManager.getTransaction().commit();
+
+            entityManager.close();
+
+            entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            Employee employee1 = new Employee();
+            employee1.setName("John");
+            employee1.setSalary(1_00_000);
+
+            employee1.setDepartment(department);
+            entityManager.persist(employee1);
+            Employee employee2 = new Employee();
+            employee2.setName("Tom");
+            employee2.setSalary(50_000);
+            employee2.setDepartment(department);
+            entityManager.persist(employee2);
+
+            entityManager.getTransaction().commit();
+
+            Employee foundEmployee1 = entityManager.find(Employee.class, employee1.getId());
+            Employee foundEmployee2 = entityManager.find(Employee.class, employee2.getId());
+            System.out.println(foundEmployee1);
+            System.out.println(foundEmployee2);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);

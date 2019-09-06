@@ -3,8 +3,27 @@
 > To run this example, rename `10-persistence.xml` to `persistence.xml`
 
 1. How can you make this example run without any exception?
+->
+      @OneToOne(cascade = CascadeType.PERSIST)
+       private ParkingSpace parkingSpace; in Employee entity
+
 2. How many tables will be created? Which table has the foreign key?
+ ->
+ 2 tables will be created.employees and parking_lot.Employee has the foreign key.
+
 3. How can you rename foreign key name to `plot_id`?
+->   @JoinColumn(name="plot_id")
+        @OneToOne
+         private ParkingSpace parkingSpace; in employee entity.
+
 4. How can you create bidirectional mapping between `Employee` and `ParkingSpace`?
+-> @OneToOne(mappedBy = "parkingSpace")
+       private Employee employee; in parkingSpace entity.
+
 5. Create an employee and assign them a parking lot. Make sure if you fetch parking employee is also fetched.
 Now, how can you delete the parking lot?
+-> entityManager.getTransaction().begin();
+   foundParking.getEmployee().setParkingSpace(null);
+   entityManager.remove(foundParking);
+   entityManager.getTransaction().commit();
+   entityManager.close();
