@@ -1,0 +1,4 @@
+Defines strategies for fetching data from the database.
+The EAGER strategy is a requirement on the persistence provider runtime that data must be eagerly fetched.
+The LAZY strategy is a hint to the persistence provider runtime that data should be fetched lazily when it is first accessed.
+The implementation is permitted to eagerly fetch data for which the LAZY strategy hint has been specified.
