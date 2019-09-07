@@ -1,0 +1,2 @@
+Table name -  employees will be created as @Table annotation is specified in the class Employee
+by default the class name is taken as table name if @Table annotation is not present.
