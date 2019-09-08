@@ -27,7 +27,16 @@ public class Employee {
     private Map<String, String> phoneNumbers;
 
 
-    public Employee() {
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumbers=" + phoneNumbers +
+                '}';
+    }
+
+    Employee() {
     }
 
     public Employee(String name, Map<String, String> phoneNumbers) {
