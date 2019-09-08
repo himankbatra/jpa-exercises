@@ -7,3 +7,32 @@
 5. Should use long id or UUID? Which to use when?
 
 
+# Answers
+
+1) The TableGenerator uses an underlying database table that holds segments of identifier generation values.
+2) allocationSize=N means that "Go and fetch the next value from the database once in every N persist calls. And locally increment the value by 1 in between.".
+initialValue=N means that start the index from N and then increment by 1.
+3)To use a sequence-based id, Hibernate provides the SequenceStyleGenerator class.
+  This generator uses sequences if they're supported by our database, and switches to table generation if they aren't.
+4) GenerationType.AUTO: Hibernate selects the generation strategy based on the used dialect,
+   GenerationType.IDENTITY: Hibernate relies on an auto-incremented database column to generate the primary key,
+   GenerationType.SEQUENCE: Hibernate requests the primary key value from a database sequence,
+   GenerationType.TABLE: Hibernate uses a database table to simulate a sequence.
+
+   IDENTITY is only a good choice when we cannot use SEQUENCE (e.g. MySQL) because it disables JDBC batch updates.
+
+   SEQUENCE is the preferred option, especially when used with an identifier optimizer like pooled or pooled-lo.
+
+   TABLE is to be avoided at any cost since it uses a separate transaction to fetch the identifier and row-level locks which scales poorly.
+
+   AUTO this is default strategy.
+
+  5) An interesting feature introduced in Hibernate 5 is the UUIDGenerator.
+   To use this, all we need to do is declare an id of type UUID with @GeneratedValue annotation.
+   Hibernate will generate an id of the form “8dd5f315-9788-4d00-87bb-10eed9eff566”.
+
+   don't use UUIDs unless either
+
+   we have "small" tables, or
+   we really need them because of generating unique ids from different places (and have not figured out another way to
+   do it).

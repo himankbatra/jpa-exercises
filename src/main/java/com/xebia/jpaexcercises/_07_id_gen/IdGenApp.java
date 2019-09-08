@@ -11,9 +11,14 @@ public class IdGenApp {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Employee employee = new Employee();
-        employee.setName("Test Employee");
-        entityManager.persist(employee);
+
+        int i=0;
+        while(i++<6){
+            Employee employee = new Employee();
+            employee.setName("Test Employee");
+            entityManager.persist(employee);
+
+        }
         entityManager.getTransaction().commit();
 
         Employee foundEmployee = entityManager.find(Employee.class, 1L);

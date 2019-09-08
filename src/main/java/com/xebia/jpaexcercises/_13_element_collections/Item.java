@@ -12,6 +12,14 @@ public class Item {
     public Item() {
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
     public Item(String name, BigDecimal price) {
         this.name = name;
         this.price = price;

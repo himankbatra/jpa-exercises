@@ -14,14 +14,18 @@ public class Employee {
 
     private String name;
 
+
+
     @ElementCollection
     @CollectionTable(
-            name = "phonetype_to_phone_number",
+          // name = "phonetype_to_phone_number",
+            name = "phone_numbers",
             joinColumns = @JoinColumn(name = "emp_id")
     )
     @MapKeyColumn(name = "phone_type")
     @Column(name = "phone_number")
     private Map<String, String> phoneNumbers;
+
 
     public Employee() {
     }

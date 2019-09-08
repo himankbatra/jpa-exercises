@@ -3,11 +3,39 @@
 > To make this exercise work, rename 11-persistence.xml to persistence.xml
 
 1. How can you fix the code so that no exception  is thrown?
-->
+-> exception : Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'department_id' cannot be null
+
+Optional is being removed because it makes the association mandatory.
+
 
 2. Once you fix the exception, explain why two `SELECT` queries are fired between `Finding Employee` and `Found Employee`? Can you reduce it to one?
-->
+-> Two select queries are fired because entitymanager.find() is calling toString method. In toString method employee is calling department.
+   So 2nd select query is retrieving the department details.
+
 3. What table structure got created?
+-> Employee :
+
+   department_id    bigint(20)    YES    MUL
+   id    bigint(20)    NO    PRI
+   name    varchar(255)    YES
+   salary    bigint(20)    NO
+
+   Department :
+   id    bigint(20)    NO    PRI
+   name    varchar(255)    YES
+
+
 4. Who is the owning side and who is the inverse side?
+-> inverse side : Department
+   Owning side :Employee
+
 5. How many SQL queries will be fired if you find department?
+-> 2 queries are fired
+select department0_.id as id1_0_0_, department0_.name as name2_0_0_ from departments department0_ where department0_.id=?
+select employees0_.department_id as departme4_1_0_, employees0_.id as id1_1_0_, employees0_.id as id1_1_1_, employees0_.department_id as departme4_1_1_, employees0_.name as name2_1_1_, employees0_.salary as salary3_1_1_ from employees employees0_ where employees0_.department_id=?
+
 6. What will happen if you remove `mappedBy` attribute Department.java?
+->If we remove mappedBy, a new departments_employees table is created.
+Department_id	bigint(20)	NO	MUL
+employees_id	bigint(20)	NO	PRI
+

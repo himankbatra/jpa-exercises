@@ -12,6 +12,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
     @ManyToMany
     private List<Employee> employees;
 
@@ -32,6 +33,15 @@ public class Project {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+               ", totalEmployees=" + employees.size() +
+                '}';
     }
 
     public String getName() {

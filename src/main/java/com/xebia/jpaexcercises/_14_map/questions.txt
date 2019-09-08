@@ -23,3 +23,34 @@ use jpaex;
 +--------------+--------------+------+-----+---------+-------+
 ```
 5. How can you store multiple phone numbers with a phone_type i.e. `Map<String, List<String>>`?
+
+#Answers
+
+1.  3 tables are created :
+
+    phonetype_to_phone_number :emp_id, phone_number,phone_type
+    employees: id,name
+    hibernate_sequence
+
+2&3 .Adding this line to phoneNumber field in Employee.java
+        @CollectionTable(
+            name = "phone_numbers",///for table name
+            joinColumns = @JoinColumn(name = "emp_id")/// for id column in phone_numbers
+                )
+
+
+4. Formerly table has following structure
+
+Employee_id	bigint(20)	NO	PRI
+phoneNumbers	varchar(255)	YES
+phoneNumbers_KEY	varchar(255)	NO	PRI
+
+ @ElementCollection
+    @CollectionTable(
+          // name = "phonetype_to_phone_number",
+            name = "phone_numbers",
+            joinColumns = @JoinColumn(name = "emp_id")
+    )
+    @MapKeyColumn(name = "phone_type")
+    @Column(name = "phone_number")
+    private Map<String, String> phoneNumbers; in Employee.java.

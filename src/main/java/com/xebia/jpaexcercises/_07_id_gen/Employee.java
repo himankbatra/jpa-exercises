@@ -3,13 +3,16 @@ package com.xebia.jpaexcercises._07_id_gen;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
 import static javax.persistence.GenerationType.TABLE;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
 
-    @TableGenerator(
+   // @SequenceGenerator(name="empGen", sequenceName="ID_GEN", allocationSize=1)
+
+   @TableGenerator(
             name="empGen",
             table="ID_GEN",
             pkColumnName="GEN_KEY",
@@ -18,7 +21,13 @@ public class Employee {
             allocationSize=1)
     @Id
     @GeneratedValue(strategy=TABLE, generator="empGen")
+   // @GeneratedValue(strategy = SEQUENCE, generator="empGen")
     private long id;
+
+
+
+
+
 
     @Column(name = "full_name")
     private String name;

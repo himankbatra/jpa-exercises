@@ -14,10 +14,23 @@ public class ManyToManyApp {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
 
-            Employee employee = new Employee("Test Employee", 1_000_000);
-            entityManager.persist(employee);
+            Project project=new Project("abc");
+            entityManager.persist(project);
             entityManager.getTransaction().commit();
+            entityManager.close();
 
+            entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+            Employee employee = new Employee("Test Employee", 1_00_000);
+            Employee employee2 = new Employee("Test Employee 2", 55_000);
+            employee.addProject(project);
+           employee2.addProject(project);
+           entityManager.persist(employee);
+            entityManager.persist(employee2);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+
+            entityManager = entityManagerFactory.createEntityManager();
             Employee foundEmployee = entityManager.find(Employee.class, employee.getId());
             System.out.println(foundEmployee);
         } catch (Exception e) {

@@ -15,9 +15,11 @@ public class Employee {
     private String name;
 
     @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name ="items",joinColumns = @JoinColumn(name="emp_id"))
     private List<Item> items;
 
     @ElementCollection
+    @CollectionTable(name = "nick_names",joinColumns = @JoinColumn(name="emp_id"))
     private Set<String> nickNames;
 
     public Employee() {
@@ -25,6 +27,16 @@ public class Employee {
 
     public Employee(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+              //  ", items=" + items +
+               // ", nickNames=" + nickNames +
+                '}';
     }
 
     public String getName() {

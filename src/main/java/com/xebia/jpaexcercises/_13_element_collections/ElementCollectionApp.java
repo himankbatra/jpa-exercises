@@ -19,7 +19,9 @@ public class ElementCollectionApp {
             entityManager.getTransaction().begin();
 
             Employee employee = new Employee("Test Employee");
-            employee.setItems(Arrays.asList(new Item("pen", BigDecimal.valueOf(100L)), new Item("notebook",BigDecimal.valueOf(200L))));
+        employee.setItems(Arrays.asList(new Item("pen", BigDecimal.valueOf(100L)), new Item("notebook",
+            BigDecimal.valueOf(200L))));
+
             Set<String> nickNames = new HashSet<>();
             nickNames.add("test1");
             nickNames.add("test2");
@@ -30,8 +32,10 @@ public class ElementCollectionApp {
             entityManager.close();
 
             entityManager = entityManagerFactory.createEntityManager();
+            System.out.println("finding employees");
             Employee foundEmployee = entityManager.find(Employee.class, employee.getId());
             System.out.println(foundEmployee);
+            System.out.println("found employees");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
