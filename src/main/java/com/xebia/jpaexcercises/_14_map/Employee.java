@@ -1,6 +1,7 @@
 package com.xebia.jpaexcercises._14_map;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -18,17 +19,20 @@ public class Employee {
 
     @ElementCollection
     @CollectionTable(
-          // name = "phonetype_to_phone_number",
-            name = "phone_numbers",
+       //   name = "phonetype_to_phone_number",
+           name = "phone_numbers",
             joinColumns = @JoinColumn(name = "emp_id")
     )
     @MapKeyColumn(name = "phone_type")
     @Column(name = "phone_number")
-    private Map<String, String> phoneNumbers;
+    private Map<String, PhoneNumber> phoneNumbers;
+
+
 
 
     @Override
     public String toString() {
+
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -39,7 +43,7 @@ public class Employee {
     Employee() {
     }
 
-    public Employee(String name, Map<String, String> phoneNumbers) {
+    public Employee(String name, Map<String, PhoneNumber> phoneNumbers ) {
         this.name = name;
         this.phoneNumbers = phoneNumbers;
     }
@@ -52,7 +56,7 @@ public class Employee {
         return name;
     }
 
-    public Map<String, String> getPhoneNumbers() {
+    public Map<String, PhoneNumber> getPhoneNumbers() {
         return phoneNumbers;
     }
 }

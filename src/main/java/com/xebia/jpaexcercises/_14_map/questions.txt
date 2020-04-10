@@ -54,3 +54,5 @@ phoneNumbers_KEY	varchar(255)	NO	PRI
     @MapKeyColumn(name = "phone_type")
     @Column(name = "phone_number")
     private Map<String, String> phoneNumbers; in Employee.java.
+
+  5.

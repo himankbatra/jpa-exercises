@@ -37,7 +37,7 @@ use jpaex;
 
  5.
 
-    Project project=new Project("abc");
+            Project project=new Project("abc");
             entityManager.persist(project);
             entityManager.getTransaction().commit();
             entityManager.close();
@@ -47,8 +47,8 @@ use jpaex;
             Employee employee = new Employee("Test Employee", 1_000_000);
             Employee employee2 = new Employee("Test Employee 2", 1_5_000);
             employee.addProject(project);
-           employee2.addProject(project);
-           entityManager.persist(employee);
+            employee2.addProject(project);
+            entityManager.persist(employee);
             entityManager.persist(employee2);
             entityManager.getTransaction().commit();
             entityManager.close();
